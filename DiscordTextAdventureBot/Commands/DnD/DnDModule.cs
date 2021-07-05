@@ -3,9 +3,12 @@ using Discord.Commands;
 using Discord.WebSocket;
 using DiscordBotLib.DataAccess;
 using DiscordBotLib.Helpers;
+using DungeonsAndDiscordLib;
 using DungeonsAndDiscordLib.DataAccess.Repositories;
 using DungeonsAndDiscordLib.Helpers;
 using DungeonsAndDiscordLib.Models.Rooms;
+using DungeonsAndDiscordLib.Models.Weapons;
+using DungeonsAndDiscordLib.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,8 +43,42 @@ namespace DiscordTextAdventureBot.Commands.DnD
             var server = await ServerHelper.GetOrAddServer(Context.Guild.Id, _serverRepository);
             var player = await PlayerHelper.GetOrAddPlayer(user, _dndPlayerRepository);
 
-            Room room = new Room("Starting Room", "The room you start in");
-            await Context.Channel.SendEmbedAsync(room.Title, room.Description, ColorHelper.GetColor(server));
+            if (player.Level == 1)
+            {
+                CommandHelper.SetValidCommands(player, new List<Command>() { Command.Info, Command.Proceed }); // TODO We could use a role, We could save this to the DB
+
+                IRoom room = new Room("Starting Room", $"Welcome {Context.User.Mention} to `Dungeons and Discord!`\n\n" +
+                    $"You find yourself at the entrance to a dark and lonely dungeon. You happen to see a `{player.Weapon.Name}` at your feet. You pick it up.");
+
+                var commands = CommandHelper.GetValidCommandString(player);
+
+                await Context.Channel.SendEmbedAsync(room.Title, room.Description + commands, ColorHelper.GetColor(server));
+            }
+            else
+            {
+                await ReplyAsync("Wecome back!");
+                // Generate room the player starts in and display it
+                await ReplyAsync("TODO: Actually do something...");
+            }
+            
+        }
+
+        [Command("Proceed")]
+        [Summary("Proceed to the next room")]
+        public async Task Proceed()
+        {
+            var user = await UserHelper.GetOrAddUser(Context.User, _userRepository);
+            var server = await ServerHelper.GetOrAddServer(Context.Guild.Id, _serverRepository);
+            var player = await PlayerHelper.GetOrAddPlayer(user, _dndPlayerRepository);
+
+            if(!player.ValidCommands.Contains(Command.Proceed))
+            {
+                await ReplyAsync("You can't use this command right now");
+                return;
+            }
+
+            CommandHelper.SetValidCommands(player, new List<Command>() { Command.Info, Command.Proceed }); // TODO We could use a role, We could save this to the DB
+            await ReplyAsync("If this command was written you would have entered the next room...");
         }
 
         [Command("info")]
@@ -58,6 +95,9 @@ namespace DiscordTextAdventureBot.Commands.DnD
             builder.AddField("Name", player.Name, true);
             builder.AddField("Level", player.Level, true);
             builder.AddField("HP", player.Hp, true);
+            builder.AddField("Weapon", player.Weapon.Name, true);
+            builder.AddField("Weapon Base Damage", player.Weapon.BaseDamage);
+            builder.AddField("Weapon Damage Range", player.Weapon.DamageRange);
             builder.Color = ColorHelper.GetColor(server);
             builder.WithThumbnailUrl(Context?.User?.GetAvatarUrl() ?? _client.CurrentUser.GetDefaultAvatarUrl());
 
