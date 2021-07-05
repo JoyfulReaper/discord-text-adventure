@@ -1,5 +1,8 @@
-﻿using DungeonsAndDiscordLib.Models;
+﻿using DungeonsAndDiscordLib.Enums;
+using DungeonsAndDiscordLib.Models;
+using DungeonsAndDiscordLib.Models.Weapons;
 using System;
+using System.Collections.Generic;
 
 namespace DungeonsAndDiscordLib
 {
@@ -9,6 +12,8 @@ namespace DungeonsAndDiscordLib
         public int Level { get; set; }
         public int Hp { get; set; } = 100;
         public ulong UserId { get; set; }
+        public IWeapon Weapon { get; set; } = null;
+        public List<Command> ValidCommands = new List<Command>();
 
         public Player()
         {

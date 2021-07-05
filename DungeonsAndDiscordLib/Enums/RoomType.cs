@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DungeonsAndDiscordLib.Models.Enums
+namespace DungeonsAndDiscordLib.Enums
 {
     public enum RoomType
     {

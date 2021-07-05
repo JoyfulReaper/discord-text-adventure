@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace DungeonsAndDiscordLib
 {
-    interface ICharacter
+    public static class GameConfig
     {
-        public string Name { get; set; }
-        public int Level { get; set; }
-        public int Hp { get; set; }
-        public IWeapon Weapon { get; set; }
+        //public static Type StartingWeapon { get; set; } =  typeof(Dagger);
     }
 }

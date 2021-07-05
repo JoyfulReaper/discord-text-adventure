@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DungeonsAndDiscordLib.Models.Weapons;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ namespace DungeonsAndDiscordLib
         public string Name { get; set; }
         public int Level { get; set; }
         public int Hp { get; set; }
+        public IWeapon Weapon { get; set; } = null;
 
         public Enemy(string name, int level = 1, int hp = 10)
         {

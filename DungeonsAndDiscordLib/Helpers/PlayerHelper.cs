@@ -20,8 +20,21 @@ namespace DungeonsAndDiscordLib.Helpers
                 await dndPlayerRepository.AddAsync(playerDb);
             }
             playerDb.Name = user.UserName;
+            playerDb.Weapon = WeaponHelper.GetWeapon(playerDb);
 
             return playerDb;
+        }
+
+        public static async Task<bool> PlayerExists(DiscordBotLib.Models.User user,
+            IDndPlayerRepository dndPlayerRepository)
+        {
+            var playerDb = await dndPlayerRepository.GetPlayerById(user.Id);
+            if (playerDb == null)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
