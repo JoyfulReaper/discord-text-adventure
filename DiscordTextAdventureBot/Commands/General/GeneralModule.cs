@@ -136,7 +136,7 @@ namespace DiscordBot.Commands
 
             var builder = new EmbedBuilder()
                 .WithThumbnailUrl(_client.CurrentUser.GetAvatarUrl() ?? _client.CurrentUser.GetDefaultAvatarUrl())
-                .WithDescription("Dungeons And Discord\nMIT License Copyright(c) 2021 JoyfulReaper and KT-Lieser\nhttps://github.com/KT-Kieser/discord-text-adventure\n\n" +
+                .WithDescription("Dungeons And Discord\nMIT License Copyright(c) 2021 JoyfulReaper and KT-Kieser\nhttps://github.com/KT-Kieser/discord-text-adventure\n\n" +
                 $"See `{prefix}invite` for the link to invite DiscordBot to your server!")
                 .WithColor(ColorHelper.GetColor(server))
                 .WithCurrentTimestamp();
