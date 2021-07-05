@@ -9,14 +9,24 @@ using System.Threading.Tasks;
 
 namespace DungeonsAndDiscordLib.DataAccess.Repositories
 {
-    public class DndPlayerRepository : Repository<Player>
+    public class DndPlayerRepository : Repository<Player>, IDndPlayerRepository
     {
         private readonly ILogger<DndPlayerRepository> _logger;
 
-        public DndPlayerRepository(ISettings settings, 
+        public DndPlayerRepository(ISettings settings,
             ILogger<DndPlayerRepository> logger) : base(settings, logger)
         {
             _logger = logger;
+        }
+
+        public async Task<Player> GetPlayerById(ulong id)
+        {
+            var queryResult = await QuerySingleOrDefaultAsync<Player>($"SELECT d.* FROM {TableName} d " +
+                $"INNER JOIN User u ON d.UserId = u.id" +
+                $"WHERE u.UserId = @UserId",
+                new { UserId = id });
+
+            return queryResult;
         }
 
         public override async Task AddAsync(Player entity)

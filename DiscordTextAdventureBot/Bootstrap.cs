@@ -28,6 +28,7 @@ using Discord.Commands;
 using Discord.WebSocket;
 using DiscordBotLib.Extensions;
 using DiscordBotLib.Services;
+using DungeonsAndDiscordLib.DataAccess.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
@@ -100,7 +101,8 @@ namespace DiscordBot
                     x.LogSeverity = LogSeverity.Verbose;
                     x.UserAgent = "DiscordBot by JoyfulReaper";
                 })
-                .AddDiscordBotLib(commandService, socketClient, config);
+                .AddDiscordBotLib(commandService, socketClient, config)
+                .AddSingleton<IDndPlayerRepository, DndPlayerRepository>();
                 
 
             switch(database)

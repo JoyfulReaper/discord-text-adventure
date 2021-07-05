@@ -2,6 +2,7 @@
 using Discord.Commands;
 using DiscordBotLib.DataAccess;
 using DiscordBotLib.Helpers;
+using DungeonsAndDiscordLib.DataAccess.Repositories;
 using DungeonsAndDiscordLib.Models.Rooms;
 using System;
 using System.Collections.Generic;
@@ -14,10 +15,13 @@ namespace DiscordTextAdventureBot.Commands.DnD
     public class DnDModule : ModuleBase<SocketCommandContext>
     {
         private readonly IServerRepository _serverRepository;
+        private readonly IDndPlayerRepository _dndPlayerRepository;
 
-        public DnDModule(IServerRepository serverRepository)
+        public DnDModule(IServerRepository serverRepository,
+            IDndPlayerRepository dndPlayerRepository)
         {
             _serverRepository = serverRepository;
+            _dndPlayerRepository = dndPlayerRepository;
         }
 
         [Command("start")]
@@ -34,7 +38,7 @@ namespace DiscordTextAdventureBot.Commands.DnD
         [Summary("Game Info")]
         public async Task Info()
         {
-
+            var builder = new EmbedBuilder();
         }
     }
 }
