@@ -3,7 +3,7 @@ using System;
 
 namespace DungeonsAndDiscordLib
 {
-    public class Player : ICharacter
+    public class Player : DatabaseEntity, ICharacter
     {
         public string Name { get; set; }
         public int Level { get; set; }

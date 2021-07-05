@@ -29,5 +29,12 @@ namespace DiscordTextAdventureBot.Commands.DnD
             Room room = new Room("Starting Room", "The room you start in");
             await Context.Channel.SendEmbedAsync(room.Title, room.Description, ColorHelper.GetColor(server));
         }
+
+        [Command("info")]
+        [Summary("Game Info")]
+        public async Task Info()
+        {
+
+        }
     }
 }
