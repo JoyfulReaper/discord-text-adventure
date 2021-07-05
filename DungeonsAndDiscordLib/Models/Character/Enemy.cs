@@ -10,13 +10,13 @@ namespace DungeonsAndDiscordLib
     {
         public string Name { get; set; }
         public int Level { get; set; }
-        public int HP { get; set; }
+        public int Hp { get; set; }
 
         public Enemy(string name, int level = 1, int hp = 10)
         {
             Name = name;
             Level = level;
-            HP = hp;
+            Hp = hp;
         }
     }
 }

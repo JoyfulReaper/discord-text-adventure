@@ -17,13 +17,15 @@ namespace DungeonsAndDiscordLib.DataAccess.Repositories
             ILogger<DndPlayerRepository> logger) : base(settings, logger)
         {
             _logger = logger;
+            TableName = "DndPlayer";
         }
 
         public async Task<Player> GetPlayerById(ulong id)
         {
-            var queryResult = await QuerySingleOrDefaultAsync<Player>($"SELECT d.* FROM {TableName} d " +
-                $"INNER JOIN User u ON d.UserId = u.id" +
-                $"WHERE u.UserId = @UserId",
+            var queryResult = await QueryFirstAsync<Player>($"SELECT d.Level, d.Hp, d.UserId " +
+                $"FROM {TableName} d " +
+                $"INNER JOIN User u ON d.UserId = u.Id " +
+                $"WHERE u.Id = @UserId",
                 new { UserId = id });
 
             return queryResult;

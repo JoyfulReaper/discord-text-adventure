@@ -10,6 +10,6 @@ namespace DungeonsAndDiscordLib
     {
         public string Name { get; set; }
         public int Level { get; set; }
-        public int HP { get; set; }
+        public int Hp { get; set; }
     }
 }
