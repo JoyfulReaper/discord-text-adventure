@@ -43,15 +43,15 @@ namespace DiscordTextAdventureBot.Commands.DnD
             var server = await ServerHelper.GetOrAddServer(Context.Guild.Id, _serverRepository);
             var player = await PlayerHelper.GetOrAddPlayer(user, _dndPlayerRepository);
 
+            player.ValidCommands = Command.Info | Command.Proceed;
+            // TODO Persist valid commands here (Update DndPlayerRepository)
+
             if (player.Level == 1)
             {
-                CommandHelper.SetValidCommands(player, new List<Command>() { Command.Info, Command.Proceed }); // TODO We could use a role, We could save this to the DB
-
                 IRoom room = new Room("Starting Room", $"Welcome {Context.User.Mention} to `Dungeons and Discord!`\n\n" +
                     $"You find yourself at the entrance to a dark and lonely dungeon. You happen to see a `{player.Weapon.Name}` at your feet. You pick it up.");
 
                 var commands = CommandHelper.GetValidCommandString(player);
-
                 await Context.Channel.SendEmbedAsync(room.Title, room.Description + commands, ColorHelper.GetColor(server));
             }
             else
@@ -71,13 +71,12 @@ namespace DiscordTextAdventureBot.Commands.DnD
             var server = await ServerHelper.GetOrAddServer(Context.Guild.Id, _serverRepository);
             var player = await PlayerHelper.GetOrAddPlayer(user, _dndPlayerRepository);
 
-            if(!player.ValidCommands.Contains(Command.Proceed))
+            if (!player.ValidCommands.HasFlag(Command.Proceed))
             {
                 await ReplyAsync("You can't use this command right now");
                 return;
             }
 
-            CommandHelper.SetValidCommands(player, new List<Command>() { Command.Info, Command.Proceed }); // TODO We could use a role, We could save this to the DB
             await ReplyAsync("If this command was written you would have entered the next room...");
         }
 

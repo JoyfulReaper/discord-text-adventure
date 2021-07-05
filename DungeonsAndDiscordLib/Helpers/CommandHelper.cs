@@ -11,15 +11,7 @@ namespace DungeonsAndDiscordLib.Helpers
     {
         public static string GetValidCommandString(Player player)
         {
-            return  "\n\n*Valid Commands:* " + string.Join(", ", player.ValidCommands);
-        }
-
-        public static bool SetValidCommands(Player player, List<Command> commands)
-        {
-            // TODO Check enum options are valid
-
-            player.ValidCommands = commands;
-            return true;
+            return "\n\n*Valid Commands:* " + player.ValidCommands.ToString();
         }
     }
 }

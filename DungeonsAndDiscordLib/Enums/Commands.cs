@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace DungeonsAndDiscordLib.Enums
 {
+    // Needs to be powers of 2
+    [Flags]
     public enum Command
     {
-        Start,
-        Info,
-        Proceed,
+        Start = 1,
+        Info = 2,
+        Proceed = 4,
+        Attack = 8
     }
 }

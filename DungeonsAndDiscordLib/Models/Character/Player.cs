@@ -13,7 +13,7 @@ namespace DungeonsAndDiscordLib
         public int Hp { get; set; } = 100;
         public ulong UserId { get; set; }
         public IWeapon Weapon { get; set; } = null;
-        public List<Command> ValidCommands = new List<Command>();
+        public Command ValidCommands { get; set; }
 
         public Player()
         {
