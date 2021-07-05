@@ -136,7 +136,7 @@ namespace DiscordBot.Commands
 
             var builder = new EmbedBuilder()
                 .WithThumbnailUrl(_client.CurrentUser.GetAvatarUrl() ?? _client.CurrentUser.GetDefaultAvatarUrl())
-                .WithDescription("DiscordBot\nMIT License Copyright(c) 2021 JoyfulReaper and KT-Lieser\nhttps://github.com/KT-Kieser/discord-text-adventure\n\n" +
+                .WithDescription("Dungeons And Discord\nMIT License Copyright(c) 2021 JoyfulReaper and KT-Lieser\nhttps://github.com/KT-Kieser/discord-text-adventure\n\n" +
                 $"See `{prefix}invite` for the link to invite DiscordBot to your server!")
                 .WithColor(ColorHelper.GetColor(server))
                 .WithCurrentTimestamp();
@@ -157,7 +157,7 @@ namespace DiscordBot.Commands
             var server = await _servers.GetServer(Context.Guild);
             if(Context.Guild == null)
             {
-                await Context.Channel.SendEmbedAsync("Discord Bot", "DiscordBot was written by JoyfulReaper\nhttps://github.com/JoyfulReaper/DiscordBot", 
+                await Context.Channel.SendEmbedAsync("Dungeons and Discord", "DiscordBot was written by JoyfulReaper\nhttps://github.com/JoyfulReaper/DiscordBot", 
                     ColorHelper.RandomColor(), _client.CurrentUser.GetAvatarUrl() ?? _client.CurrentUser.GetDefaultAvatarUrl());
                 return;
             }
