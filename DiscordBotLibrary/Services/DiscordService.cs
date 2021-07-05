@@ -121,7 +121,7 @@ namespace DiscordBotLib.Services
                             {
                                 var builder = new EmbedBuilder()
                                     .WithThumbnailUrl(_client.CurrentUser.GetAvatarUrl() ?? _client.CurrentUser.GetDefaultAvatarUrl())
-                                    .WithDescription("DiscordBot Starting\nMIT License Copyright(c) 2021 JoyfulReaper\nhttps://github.com/JoyfulReaper/DiscordBotTemplate")
+                                    .WithDescription("Dungeons and Discord Starting\nMIT License Copyright(c) 2021 JoyfulReaper and KT-Kieser\nhttps://github.com/KT-Kieser/discord-text-adventure")
                                     .WithColor(await _servers.GetEmbedColor(guild.Id))
                                     .WithCurrentTimestamp();
 

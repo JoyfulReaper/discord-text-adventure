@@ -51,11 +51,11 @@ namespace DiscordBot
 
         static async Task Main(string[] args)
         {
-            ConsoleHelper.ColorWriteLine(ConsoleColor.Red, "DiscordBotTemplate");
+            ConsoleHelper.ColorWriteLine(ConsoleColor.Red, "Dungeons And Discord");
             ConsoleHelper.ColorWriteLine(ConsoleColor.Blue, @"MIT License
 
-Copyright(c) 2021 Kyle Givler (JoyfulReaper)
-https://github.com/JoyfulReaper" + "\n\n");
+Copyright(c) 2021 Kyle Givler (JoyfulReaper) and KT-Kieser
+https://github.com/KT-Kieser/discord-text-adventure" + "\n\n");
 
             // Initial Logging for before the Dependency Injection is setup
             Bootstrap.SetupLogging();
