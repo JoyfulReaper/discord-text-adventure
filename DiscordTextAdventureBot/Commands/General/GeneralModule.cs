@@ -72,7 +72,7 @@ namespace DiscordBot.Commands
             _logger.LogInformation("{username}#{discriminator} executed uptime: on {server}/{channel}",
                 Context.User.Username, Context.User.Discriminator, Context.Guild?.Name ?? "DM", Context.Channel.Name);
 
-            await Context.Channel.SendEmbedAsync("Invite Link", $"Follow the link to invite DiscordBot!\n{_settings.InviteLink}",
+            await Context.Channel.SendEmbedAsync("Invite Link", $"Follow the link to invite Dungeons and Discord!\n{_settings.InviteLink}",
                 ColorHelper.GetColor(await _servers.GetServer(Context.Guild)), ImageLookupUtility.GetImageUrl("INVITE_IMAGES"));
 
             //await ReplyAsync(_settings.InviteLink);
@@ -137,7 +137,7 @@ namespace DiscordBot.Commands
             var builder = new EmbedBuilder()
                 .WithThumbnailUrl(_client.CurrentUser.GetAvatarUrl() ?? _client.CurrentUser.GetDefaultAvatarUrl())
                 .WithDescription("Dungeons And Discord\nMIT License Copyright(c) 2021 JoyfulReaper and KT-Kieser\nhttps://github.com/KT-Kieser/discord-text-adventure\n\n" +
-                $"See `{prefix}invite` for the link to invite DiscordBot to your server!")
+                $"See `{prefix}invite` for the link to invite Dungeons And Discord to your server!")
                 .WithColor(ColorHelper.GetColor(server))
                 .WithCurrentTimestamp();
 
