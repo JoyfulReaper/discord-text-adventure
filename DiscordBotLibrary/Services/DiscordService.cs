@@ -196,7 +196,7 @@ namespace DiscordBotLib.Services
             Console.Write("Please enter the bot's token: ");
             var token = Console.ReadLine();
 
-            DiscordBotSettings settings = new DiscordBotSettings { Token = token, Game = "https://github.com/JoyfulReaper" };
+            DiscordBotSettings settings = new DiscordBotSettings { Token = token, Game = "Dungeons and Discord" };
             _discordBotSettingsRepository.AddAsync(settings);
 
             return settings;
