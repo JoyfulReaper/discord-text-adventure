@@ -22,6 +22,11 @@ namespace DungeonsAndDiscordLib.Helpers
                 commands |= Command.Start;
             }
 
+            if(player.Level > 1 && !commands.HasFlag(Command.Info))
+            {
+                commands |= Command.Info;
+            }
+
             player.ValidCommands = commands;
             dndPlayerRepository.EditAsync(player);
         }
