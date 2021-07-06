@@ -43,8 +43,7 @@ namespace DiscordTextAdventureBot.Commands.DnD
             var server = await ServerHelper.GetOrAddServer(Context.Guild.Id, _serverRepository);
             var player = await PlayerHelper.GetOrAddPlayer(user, _dndPlayerRepository);
 
-            player.ValidCommands = Command.Info | Command.Proceed;
-            // TODO Persist valid commands here (Update DndPlayerRepository)
+            CommandHelper.SetValidCommands(player, Command.Info | Command.Proceed, _dndPlayerRepository);
 
             if (player.Level == 1)
             {
@@ -88,6 +87,11 @@ namespace DiscordTextAdventureBot.Commands.DnD
             var server = await ServerHelper.GetOrAddServer(Context.Guild.Id, _serverRepository);
             var player = await PlayerHelper.GetOrAddPlayer(user, _dndPlayerRepository);
 
+            if(!player.ValidCommands.HasFlag(Command.Info))
+            {
+                await ReplyAsync($"Please use the `{server?.Prefix ?? string.Empty}start` command to start the game");
+                return;
+            }
 
             var builder = new EmbedBuilder();
             builder.Title = "Player Information";

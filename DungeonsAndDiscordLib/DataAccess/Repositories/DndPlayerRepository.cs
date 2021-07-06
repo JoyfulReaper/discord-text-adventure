@@ -22,7 +22,7 @@ namespace DungeonsAndDiscordLib.DataAccess.Repositories
 
         public async Task<Player> GetPlayerById(ulong id)
         {
-            var queryResult = await QueryFirstAsync<Player>($"SELECT d.Level, d.Hp, d.UserId " +
+            var queryResult = await QueryFirstAsync<Player>($"SELECT d.* " +
                 $"FROM {TableName} d " +
                 $"INNER JOIN User u ON d.UserId = u.Id " +
                 $"WHERE u.Id = @UserId",
@@ -33,8 +33,8 @@ namespace DungeonsAndDiscordLib.DataAccess.Repositories
 
         public override async Task AddAsync(Player entity)
         {
-            var queryResult = await QuerySingleAsync<ulong>($"INSERT INTO {TableName} (UserId, Level, Hp) " +
-                $"VALUES (@UserId, @Level, @Hp); select last_insert_rowid();",
+            var queryResult = await QuerySingleAsync<ulong>($"INSERT INTO {TableName} (UserId, Level, Hp, ValidCommands) " +
+                $"VALUES (@UserId, @Level, @Hp, @ValidCommands); select last_insert_rowid();",
                 entity);
 
             entity.Id = queryResult;
@@ -47,7 +47,8 @@ namespace DungeonsAndDiscordLib.DataAccess.Repositories
 
         public override async Task EditAsync(Player entity)
         {
-            await ExecuteAsync($"UPDATE {TableName} SET UserId = @UserId, Level = @Level, Hp = @Hp " +
+            await ExecuteAsync($"UPDATE {TableName} SET UserId = @UserId, Level = @Level, Hp = @Hp, " +
+                $"ValidCommands = @ValidCommands " +
                 $"WHERE Id = @Id", entity);
         }
     }
